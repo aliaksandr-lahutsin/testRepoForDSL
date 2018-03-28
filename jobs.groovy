@@ -17,10 +17,6 @@ def branches = proc.in.text.readLines().collect {
 }
 
 job("MNTLAB-alahutsin-main-build-job") {
-    logRotator {
-        numToKeep(5)
-        artifactNumToKeep(5)
-    }
     parameters {
 	choiceParam('BRANCH_NAME', ['alahutsin', 'master'], '')
         activeChoiceParam('BUILDS_TRIGGER') {
@@ -62,10 +58,6 @@ job("MNTLAB-alahutsin-main-build-job") {
 
 1.upto(4) {
 job("MNTLAB-alahutsin-child${it}-build-job") {
-    logRotator {
-        numToKeep(5)
-        artifactNumToKeep(5)
-    }
     parameters {
 	choiceParam('BRANCH_NAME', branches, '')
     }
